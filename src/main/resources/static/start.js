@@ -2,27 +2,32 @@ window.onload = async function () {
     const responseMe = await fetch('/api/get-me')
     if (responseMe.ok) {
         const me = await responseMe.json()
-        putMyDataInHeader(me)
+        putEmailAndRolesInHeader(me)
         if (document.getElementById('header_my_roles').textContent.includes('ADMIN')) {
             await adminPage(me.id)
         } else {
-            putMyDataInLeftBlock(me)
-            putMyDataInRightBlock(me)
+            userPage(me)
         }
     } else {
         alert('Ошибка HTTP: ' + responseMe.status)
     }
 }
 
-function putMyDataInHeader(user) {
-    let myRoles = []
-    user.roles.forEach(r => myRoles.push(r.name))
-    document.getElementById('header_my_email').textContent = user.email
-    document.getElementById('header_my_roles').textContent =
-        myRoles.toString().replaceAll(',', ', ')
+function userPage(me) {
+    putMyNameInLeftBlock(me)
+    putMyDataInRightBlock(me)
 }
 
-function putMyDataInLeftBlock(user) {
+function putEmailAndRolesInHeader(user) {
+    document.getElementById('header_my_email').textContent = user.email
+    let roles = []
+    user.roles.forEach(r => roles.push(r.name))
+    document.getElementById('header_my_roles').textContent =
+        roles.toString().replaceAll(',', ', ')
+}
+
+function putMyNameInLeftBlock(user) {
+    console.log(document.getElementById('left_block_me'))
     document.getElementById('left_block_me').textContent = user.firstname + ' ' + user.lastname
 }
 
@@ -44,10 +49,8 @@ function putRolesIntoLiTagsAndCheckAdmin(tagId, user) {
         tagLi.setAttribute('name', 'role_user_' + user.id)
         tagLi.textContent = role
         document.getElementById(tagId).appendChild(tagLi)
-        // console.log(tagLi)
         if (role === 'ADMIN') {
             hasRoleAdmin = true
-            // tagLi.setAttribute('id', 'role_admin_' + user.id)
         }
     }
     return hasRoleAdmin
