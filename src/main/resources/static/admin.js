@@ -66,6 +66,8 @@ async function loadAllRoles() {
 }
 
 function leftBlockUserClick(id) {
+    document.getElementById('new_user_panel').hidden = true
+    document.getElementById('users_panel').hidden = false
     leftBlockUserClickRebuildLeftBlock(id)
     leftBlockUserClickRebuildRightBlock(id)
 }
