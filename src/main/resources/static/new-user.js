@@ -20,13 +20,13 @@ async function save_new_user_click() {
         id: id,
         firstname: firstname,
         lastname: lastname,
-        birthdate: birthdate,
-        email: email,
-        locked: false,
-        password: password,
+        // birthdate: birthdate,
+        // email: email,
+        // locked: false,
+        // password: password,
         // добавлять в контроллере
         // parentAdminId: Number(parentAdminId),
-        roles: roles
+        // roles: roles
     }
 
     let response = await fetch('/admin/api/save-user', {
@@ -68,8 +68,9 @@ async function save_new_user_click() {
         // добавить user на левую панель
 
         users_click()
-    } else {
-        alert('Ошибка HTTP: ' + response.status)
+        // } else {
+        //     alert('Ошибка HTTP: ' + response.status)
+        // }
     }
 }
 
@@ -110,7 +111,7 @@ function checkPassword(password) {
         : ''
 }
 
-function users_click() {
-    document.getElementById('new_user_panel').hidden = true
-    document.getElementById('users_panel').hidden = false
-}
+// function users_click() {
+//     document.getElementById('new_user_panel').hidden = true
+//     document.getElementById('users_panel').hidden = false
+// }
