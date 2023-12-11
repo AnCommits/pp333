@@ -122,17 +122,28 @@ function rightBlockUserClickRebuildRightBlock(id) {
 
     const tdRoles = document.getElementById('right_block_roles')
     tdRoles.innerHTML = ''
-    tdRoles.appendChild(document.getElementById('user_roles_' + id))
+    tdRoles.appendChild(document.getElementById('user_roles_' + id).cloneNode(true))
 }
 
-// function left_block_admin_click() {
-//     const elementTrBg = document.getElementById('tr_bg')
-//     document.getElementById('about_user_' + elementTrBg.textContent)
-//         .setAttribute('class', 'about_user')
-//
-//     handleClick('left_block_admin', false)
-//     document.getElementById('title2').textContent = 'Пользователи'
-// }
+function left_block_admin_click() {
+    leftBlockUserClickRebuildLeftBlock(0)
+    rightBlockAdminClickRebuildRightBlock()
+}
+
+function rightBlockAdminClickRebuildRightBlock() {
+    document.getElementById('new_user_panel').hidden = true
+    document.getElementById('right_block_user').hidden = true
+    const adminColumn = document.getElementsByClassName('admin_column')
+    for (let i in adminColumn) {
+        adminColumn[i].hidden = false
+    }
+    const trTags = document.getElementsByClassName('right_block_user')
+    for (let i in trTags) {
+        trTags[i].hidden = false
+    }
+    document.getElementById('title2').textContent = 'Пользователи'
+
+}
 
 // function handleClick(elementId, hide) {
 //     let links = document.getElementById('left_block').getElementsByClassName('nav-link')

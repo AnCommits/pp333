@@ -27,7 +27,6 @@
         <nav class="nav nav-pills flex-column bg-white" id="left_block">
             <a class="nav-link active disabled" href="#" onclick='left_block_admin_click()'
                id="left_block_user_0">Администратор</a>
-<!--            id="left_block_admin">Администратор</a>-->
         </nav>
     </div>
     <!------------- < < < Left block ------------->
@@ -72,8 +71,6 @@
                     </thead>
 
                     <tbody id="right_block_users">
-                    <tr hidden></tr>
-<!--                    <tr id="tr_bg" hidden></tr>-->
                     <tr id="right_block_tr_template" hidden>
                         <td id="user_id_template"></td>
                         <td id="user_firstname_template"></td>
@@ -89,12 +86,10 @@
                             <ul id="user_roles_template" class="list-group" style="list-style-type: none"></ul>
                         </td>
                         <td>
-<!--                        <td class="admin_column">-->
                             <input type="checkbox" class="checkbox" style="height: 24px; width: 24px"
                                    onclick="lock_click(template)" id="user_locked_template">
                         </td>
                         <td>
-<!--                        <td class="admin_column">-->
                             <button type="button" class="btn btn-info" data-id="template"
                                     id="user_edit_template"
                                     data-toggle="modal" data-target="#userDialog" data-action="update">
@@ -102,7 +97,6 @@
                             </button>
                         </td>
                         <td>
-<!--                        <td class="admin_column">-->
                             <button type="button" class="btn btn-danger" data-id="template"
                                     id="user_delete_template"
                                     data-toggle="modal" data-target="#userDialog" data-action="delete">
@@ -111,16 +105,13 @@
                         </td>
                     </tr>
 
-                    <tr id="right_block_user" hidden>
+                    <tr class="bg-light" id="right_block_user" hidden>
                         <td id="right_block_id"></td>
                         <td id="right_block_firstname"></td>
                         <td id="right_block_lastname"></td>
                         <td id="right_block_age"></td>
                         <td id="right_block_email"></td>
-                        <td id="right_block_roles">
-<!--                        <td>-->
-<!--                            <ul id="right_block_roles" class="list-group" style="list-style-type: none"></ul>-->
-                        </td>
+                        <td id="right_block_roles"></td>
                     </tr>
                     </tbody>
                 </table>
