@@ -50,73 +50,76 @@ $('#userDialog').on('show.bs.modal', function (event) {
 })
 
 $('#save-user-button').click(async function () {
-    const modal = $('#userDialog')
-    const id = modal.find('#user-id').val()
-    const firstname = modal.find('#user-firstname').val()
-    const lastname = modal.find('#user-lastname').val()
-    const birthdate = modal.find('#user-birthdate').val()
-    const email = modal.find('#user-email').val()
-    const password = modal.find('#user-password').val()
-    const message = checkName(firstname, lastname) + checkBirthDate(birthdate) +
-        checkEmail(email, id) + checkPassword(password)
-    if (message !== '') {
-        alert(message)
-        return
-    }
-    const age = getAge(birthdate)
-    const rolesNow = $('select#user-roles').val()
+    console.log('delete_user_button')
 
-    // rolesNow.includes('ADMIN')             не работает            -            не работает
-    // console.log(rolesNow)
-    // console.log(rolesNow.includes('ADMIN'))
-    const parentAdminId = rolesBeforeIncludesAdmin(id) !== rolesNow.includes('ADMIN')
-        ? Number(document.getElementById('my_id').textContent)
-        : document.getElementById('user_parent_id_' + id).textContent
-
-    const user = {
-        id: id,
-        firstname: firstname,
-        lastname: lastname,
-        birthdate: birthdate,
-        email: email,
-        locked: document.getElementById('user_locked_' + id).checked,
-        password: password,
-        parentAdminId: parentAdminId,
-        roles: rolesNow
-    }
-
-    let response = await fetch('/admin/api/update', {
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json; charset=utf-8'},
-        body: JSON.stringify(user)
-    })
-    if (response.ok) {
-        setTextContent(user)
-        document.getElementById('user_age_' + id).textContent = age
-        document.getElementById('user_password_' + id).textContent = await response.text()
-
-        const myEmail = document.getElementById('my_email')
-        const oldEmail = document.getElementById('user_email_' + id)
-        if (myEmail.textContent === oldEmail.textContent) {
-            myEmail.textContent = email
-            document.getElementById('my_roles').textContent = rolesNow.toString()
-        }
-        oldEmail.textContent = email
-
-        let innerUl = ''
-        rolesNow.forEach(r => {
-            innerUl += '<li class="list-group-item p-0" name="role_user_' + id + '">' + r + '</li>'
-        })
-        document.getElementById('user_roles_' + id).innerHTML = innerUl
-        document.getElementById('left_block_' + id).textContent = firstname + ' ' + lastname
-
-        modal.modal('hide')
-    } else {
-        alert('Ошибка HTTP: ' + response.status)
-    }
+    // const modal = $('#userDialog')
+    // const id = modal.find('#user-id').val()
+    // const firstname = modal.find('#user-firstname').val()
+    // const lastname = modal.find('#user-lastname').val()
+    // const birthdate = modal.find('#user-birthdate').val()
+    // const email = modal.find('#user-email').val()
+    // const password = modal.find('#user-password').val()
+    // const message = checkName(firstname, lastname) + checkBirthDate(birthdate) +
+    //     checkEmail(email, id) + checkPassword(password)
+    // if (message !== '') {
+    //     alert(message)
+    //     return
+    // }
+    // const age = getAge(birthdate)
+    // const rolesNow = $('select#user-roles').val()
+    //
+    // // rolesNow.includes('ADMIN')             не работает            -            не работает
+    // // console.log(rolesNow)
+    // // console.log(rolesNow.includes('ADMIN'))
+    // const parentAdminId = rolesBeforeIncludesAdmin(id) !== rolesNow.includes('ADMIN')
+    //     ? Number(document.getElementById('my_id').textContent)
+    //     : document.getElementById('user_parent_id_' + id).textContent
+    //
+    // const user = {
+    //     id: id,
+    //     firstname: firstname,
+    //     lastname: lastname,
+    //     birthdate: birthdate,
+    //     email: email,
+    //     locked: document.getElementById('user_locked_' + id).checked,
+    //     password: password,
+    //     parentAdminId: parentAdminId,
+    //     roles: rolesNow
+    // }
+    //
+    // let response = await fetch('/admin/api/update', {
+    //     method: 'PUT',
+    //     headers: {'Content-Type': 'application/json; charset=utf-8'},
+    //     body: JSON.stringify(user)
+    // })
+    // if (response.ok) {
+    //     setTextContent(user)
+    //     document.getElementById('user_age_' + id).textContent = age
+    //     document.getElementById('user_password_' + id).textContent = await response.text()
+    //
+    //     const myEmail = document.getElementById('my_email')
+    //     const oldEmail = document.getElementById('user_email_' + id)
+    //     if (myEmail.textContent === oldEmail.textContent) {
+    //         myEmail.textContent = email
+    //         document.getElementById('my_roles').textContent = rolesNow.toString()
+    //     }
+    //     oldEmail.textContent = email
+    //
+    //     let innerUl = ''
+    //     rolesNow.forEach(r => {
+    //         innerUl += '<li class="list-group-item p-0" name="role_user_' + id + '">' + r + '</li>'
+    //     })
+    //     document.getElementById('user_roles_' + id).innerHTML = innerUl
+    //     document.getElementById('left_block_' + id).textContent = firstname + ' ' + lastname
+    //
+    //     modal.modal('hide')
+    // } else {
+    //     alert('Ошибка HTTP: ' + response.status)
+    // }
 });
 
 $('#delete-user-button').click(async function () {
+    console.log('delete-user-button')
     const modal = $('#userDialog')
     const id = modal.find('#user-id').val()
 
@@ -124,8 +127,8 @@ $('#delete-user-button').click(async function () {
         method: 'DELETE'
     })
     modal.modal('hide')
-    document.getElementById('about_user_' + id).remove()
-    document.getElementById('left_block_' + id).remove()
+    document.getElementById('left_block_user_' + id).remove()
+    document.getElementById('right_block_user_' + id).remove()
 })
 
 function rolesBeforeIncludesAdmin(id) {

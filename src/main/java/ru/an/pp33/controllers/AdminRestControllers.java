@@ -53,10 +53,10 @@ public class AdminRestControllers {
 //        return user.getPassword();
 //    }
 
-//    @DeleteMapping("/delete/{id}")
-//    public void deleteUser(@PathVariable long id) {
-//        userService.removeUserById(id);
-//    }
+    @DeleteMapping("/delete/{id}")
+    public void deleteUser(@PathVariable long id) {
+        userService.removeUserById(id);
+    }
 
 //    @PostMapping("/save-user")
 //    public User saveUser(@RequestBody User user) {
