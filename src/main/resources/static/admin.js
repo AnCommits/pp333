@@ -85,7 +85,7 @@ function putUserOnRightBlock(user, myId) {
 
 function leftBlockUserClick(id) {
     leftBlockUserClickRebuildLeftBlock(id)
-    rightBlockUserClickRebuildRightBlock(id)
+    leftBlockUserClickRebuildRightBlock(id)
 }
 
 function leftBlockUserClickRebuildLeftBlock(id) {
@@ -97,7 +97,7 @@ function leftBlockUserClickRebuildLeftBlock(id) {
         .setAttribute('class', 'nav-link active disabled')
 }
 
-function rightBlockUserClickRebuildRightBlock(id) {
+function leftBlockUserClickRebuildRightBlock(id) {
     document.getElementById('new_user_panel').hidden = true
     const trTags = document.getElementsByClassName('right_block_user')
     for (let i in trTags) {
@@ -107,6 +107,9 @@ function rightBlockUserClickRebuildRightBlock(id) {
     for (let i in adminColumn) {
         adminColumn[i].hidden = true
     }
+    document.getElementById('right_block_tab_users').hidden = true
+    document.getElementById('right_block_tab_new_user').hidden = true
+
     document.getElementById('title2').textContent = 'О пользователе'
 
     document.getElementById('right_block_user').hidden = false
@@ -128,6 +131,8 @@ function rightBlockUserClickRebuildRightBlock(id) {
 function left_block_admin_click() {
     leftBlockUserClickRebuildLeftBlock(0)
     rightBlockAdminClickRebuildRightBlock()
+    document.getElementById('right_block_tab_users').hidden = false
+    document.getElementById('right_block_tab_new_user').hidden = false
 }
 
 function rightBlockAdminClickRebuildRightBlock() {
@@ -167,8 +172,13 @@ function rightBlockAdminClickRebuildRightBlock() {
 //         body: document.getElementById('user_locked_' + id).checked
 //     })
 // }
-//
-// function new_user_click() {
-//     document.getElementById('users_panel').hidden = true
-//     document.getElementById('new_user_panel').hidden = false
-// }
+
+function new_user_click() {
+    document.getElementById('users_panel').hidden = true
+    document.getElementById('new_user_panel').hidden = false
+}
+
+function users_click() {
+    document.getElementById('new_user_panel').hidden = true
+    document.getElementById('users_panel').hidden = false
+}
