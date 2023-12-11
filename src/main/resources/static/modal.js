@@ -26,27 +26,27 @@ $('#userDialog').on('show.bs.modal', function (event) {
         }
     }
 
-        if ((button.data('action') === 'update')) {
-            document.getElementById('userDialogLabel').textContent = 'Редактировать пользователя'
-            document.getElementById('delete-user-button').hidden = true
-            document.getElementById('save-user-button').hidden = false
-            document.getElementById('user-firstname').disabled = false
-            document.getElementById('user-lastname').disabled = false
-            document.getElementById('user-birthdate').disabled = false
-            document.getElementById('user-email').disabled = false
-            document.getElementById('user-password-area').hidden = false
-            document.getElementById('modal_roles').disabled = false
-        } else {
-            document.getElementById('userDialogLabel').textContent = 'Удалить пользователя'
-            document.getElementById('delete-user-button').hidden = false
-            document.getElementById('save-user-button').hidden = true
-            document.getElementById('user-firstname').disabled = true
-            document.getElementById('user-lastname').disabled = true
-            document.getElementById('user-birthdate').disabled = true
-            document.getElementById('user-email').disabled = true
-            document.getElementById('user-password-area').hidden = true
-            document.getElementById('modal_roles').disabled = true
-        }
+    if ((button.data('action') === 'update')) {
+        document.getElementById('userDialogLabel').textContent = 'Редактировать пользователя'
+        document.getElementById('delete-user-button').hidden = true
+        document.getElementById('save-user-button').hidden = false
+        document.getElementById('user-firstname').disabled = false
+        document.getElementById('user-lastname').disabled = false
+        document.getElementById('user-birthdate').disabled = false
+        document.getElementById('user-email').disabled = false
+        document.getElementById('user-password-area').hidden = false
+        document.getElementById('modal_roles').disabled = false
+    } else {
+        document.getElementById('userDialogLabel').textContent = 'Удалить пользователя'
+        document.getElementById('delete-user-button').hidden = false
+        document.getElementById('save-user-button').hidden = true
+        document.getElementById('user-firstname').disabled = true
+        document.getElementById('user-lastname').disabled = true
+        document.getElementById('user-birthdate').disabled = true
+        document.getElementById('user-email').disabled = true
+        document.getElementById('user-password-area').hidden = true
+        document.getElementById('modal_roles').disabled = true
+    }
 })
 
 $('#save-user-button').click(async function () {

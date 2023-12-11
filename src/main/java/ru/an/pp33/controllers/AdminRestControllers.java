@@ -28,7 +28,6 @@ public class AdminRestControllers {
         List<User> users = userService.getAllUsers();
         User me = (User) authentication.getPrincipal();
         users.forEach(u -> u.setDescendant(userUtils.isAncestor(u, me)));
-//        users.forEach(u -> System.out.println(u.getParentAdminId() +" - " + u.isDescendant()));
         return users;
     }
 

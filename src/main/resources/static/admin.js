@@ -47,13 +47,13 @@ function putUserOnRightBlock(user, myId) {
     const userHasRoleAdmin = putRolesIntoLiTagsAndCheckAdmin('user_roles_' + user.id, user)
     document.getElementById('user_locked_' + user.id).checked = user.locked
 
-    // if (userHasRoleAdmin && !user.descendant) {
-    //     document.getElementById('user_locked_' + user.id).disabled = true
-    //     document.getElementById('user_delete_' + user.id).disabled = true
-    //     if (user.id !== myId) {
-    //         document.getElementById('user_edit_' + user.id).disabled = true
-    //     }
-    // }
+    if (userHasRoleAdmin && !user.descendant) {
+        document.getElementById('user_locked_' + user.id).disabled = true
+        document.getElementById('user_delete_' + user.id).disabled = true
+        if (user.id !== myId) {
+            document.getElementById('user_edit_' + user.id).disabled = true
+        }
+    }
 }
 
 async function loadAllRoles() {
