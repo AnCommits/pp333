@@ -15,7 +15,7 @@ window.onload = async function () {
 
 function userPage(me) {
     putMyNameInLeftBlock(me)
-    putMyDataInRightBlock(me)
+    putUserDataInRightBlock(me)
 }
 
 function putEmailAndRolesInHeader(user) {
@@ -31,7 +31,7 @@ function putMyNameInLeftBlock(user) {
     document.getElementById('left_block_me').textContent = user.firstname + ' ' + user.lastname
 }
 
-function putMyDataInRightBlock(user) {
+function putUserDataInRightBlock(user) {
     document.getElementById('right_block_id').textContent = user.id
     document.getElementById('right_block_firstname').textContent = user.firstname
     document.getElementById('right_block_lastname').textContent = user.lastname
