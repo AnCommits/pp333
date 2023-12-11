@@ -31,7 +31,7 @@ public class InitDataBase {
             initAdmin3();
             initAdmin4();
             initHead();
-            initRepairMaster();
+            initManufactureMaster();
             initRepairer1();
         }
     }

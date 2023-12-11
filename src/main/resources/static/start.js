@@ -45,8 +45,9 @@ function putRolesIntoLiTagsAndCheckAdmin(tagId, user) {
     for (let i in user.roles) {
         const role = user.roles[i].name
         const tagLi = document.createElement('li')
-        tagLi.setAttribute('class', 'list-group-item p-0')
-        tagLi.setAttribute('name', 'role_user_' + user.id)
+        tagLi.setAttribute('class', 'list-group-item p-0 role_user_' + user.id)
+        // tagLi.setAttribute('class', 'list-group-item p-0')
+        // tagLi.setAttribute('name', 'role_user_' + user.id)
         tagLi.textContent = role
         document.getElementById(tagId).appendChild(tagLi)
         if (role === 'ADMIN') {

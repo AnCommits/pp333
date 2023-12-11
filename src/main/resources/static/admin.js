@@ -9,8 +9,9 @@ async function adminPage(myId) {
         })
 
         const allRoles = await loadAllRoles()
-        createOptionTags('select_new_user_roles', allRoles)
-        createOptionTags('select_modal_roles', allRoles)
+        document.getElementById('roles_number').textContent = allRoles.length
+        createOptionTags('new_user_roles', allRoles)
+        createOptionTags('modal_roles', allRoles)
     } else {
         alert('Ошибка HTTP: ' + responseUsers.status)
     }
@@ -165,7 +166,7 @@ function new_user_click() {
     document.getElementById('password').value = ''
     const rolesNumber = Number(document.getElementById('roles_number').textContent)
     for (let i = 0; i < rolesNumber; i++) {
-        document.getElementById('option_' + i).selected = false
+        document.getElementById('option_new_user_roles_' + i).selected = false
     }
     document.getElementById('users_panel').hidden = true
     document.getElementById('new_user_panel').hidden = false
@@ -176,16 +177,15 @@ function users_click() {
     document.getElementById('users_panel').hidden = false
 }
 
-function createOptionTags(sel, allRoles) {
-    const select = document.getElementById(sel)
+function createOptionTags(parentSelectId, allRoles) {
+    const select = document.getElementById(parentSelectId)
     select.size = Math.min(5, allRoles.length)
-    const option_template = document.getElementById('option_template')
+    const option_template = document.getElementById('option_template_' + parentSelectId)
     for (let i in allRoles) {
         const option = option_template.cloneNode(true)
-        option.id = 'option_' + i
+        option.id = 'option_' + parentSelectId + '_' + i
         option.textContent = allRoles[i]
         option.hidden = false
         select.appendChild(option)
     }
-    document.getElementById('roles_number').textContent = allRoles.length
 }

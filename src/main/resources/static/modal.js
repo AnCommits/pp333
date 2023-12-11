@@ -13,42 +13,18 @@ $('#userDialog').on('show.bs.modal', function (event) {
     document.getElementById('user-password').value =
         document.getElementById('user_password_' + id).textContent
 
-    // const options = document.getElementsByName('option')
-    // const liElements = document.getElementsByName('role_user_' + id)
-    // console.log(liElements)
-    // const optionsSize = options.length
-    // const liElementsSize = liElements.length
-
-    // const elementSelect = document.getElementById('modal_roles')
-    // const optionsNumber = elementSelect.getElementsByClassName('option').length
-    // for (let i = 0; i < optionsNumber; i++) {
-    //     const el = document.getElementById('option_modal_roles_' + i)
-    // }
-    // console.log(optionsNumber)
-    // const roles = document.getElementsByName('role_user_' + id)
-    // const op = document.getElementById('option_USER')
-    // const roles = document.getElementsByName('role_user_' + id)
-    // console.log(roles[0])
-    // const rolesSize = roles.length
-    // elementSelect.size = Math.min(5, elementSelect.length)
-    // roles.forEach(r => {
-    //     document.getElementById('user_role_' + o.value).selected = false
-    // })
-    // for (let i in elementsOption) {
-    //     console.log(elementsOption[i].selected)
-    //     elementsOption[i].selected = true
-    //     console.log(elementsOption[i].selected)
-    // }
-    // elementsOption.forEach(o => o.value = true)
-    // for (let r = 0; r < rolesSize; r++) {
-    //     for (let o = r; o < optionsSize; o++) {
-    //         if (roles[r].textContent === options[o].value) {
-    //             document.getElementById('user_role_' + options[o].value).selected = true
-    //             break
-    //         }
-    //     }
-    // }
-    // console.log('=====================')
+    const allRolesNumber = Number(document.getElementById('roles_number').textContent)
+    const roles = document.getElementsByClassName('role_user_' + id)
+    for (let i = 0; i < allRolesNumber; i++) {
+        const roleOutOfAll = document.getElementById('option_modal_roles_' + i)
+        roleOutOfAll.selected = false
+        for (let j = 0; j < roles.length; j++) {
+            if (roleOutOfAll.textContent === roles[j].textContent) {
+                roleOutOfAll.selected = true
+                break
+            }
+        }
+    }
 
         if ((button.data('action') === 'update')) {
             document.getElementById('userDialogLabel').textContent = 'Редактировать пользователя'
@@ -59,7 +35,7 @@ $('#userDialog').on('show.bs.modal', function (event) {
             document.getElementById('user-birthdate').disabled = false
             document.getElementById('user-email').disabled = false
             document.getElementById('user-password-area').hidden = false
-            document.getElementById('select_modal_roles').disabled = false
+            document.getElementById('modal_roles').disabled = false
         } else {
             document.getElementById('userDialogLabel').textContent = 'Удалить пользователя'
             document.getElementById('delete-user-button').hidden = false
@@ -69,7 +45,7 @@ $('#userDialog').on('show.bs.modal', function (event) {
             document.getElementById('user-birthdate').disabled = true
             document.getElementById('user-email').disabled = true
             document.getElementById('user-password-area').hidden = true
-            document.getElementById('select_modal_roles').disabled = true
+            document.getElementById('modal_roles').disabled = true
         }
 })
 

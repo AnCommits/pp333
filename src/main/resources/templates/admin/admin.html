@@ -17,7 +17,6 @@
     </div>
     <a class="text-white-50" href="/logout">Logout</a>
 </header>
-<span id='my_id' hidden></span>
 <!------------- < < < Header ------------->
 
 <main class="row">
@@ -99,15 +98,13 @@
                                    onclick="lock_click(template)" id="user_locked_template">
                         </td>
                         <td>
-                            <button type="button" class="btn btn-info" data-id="template"
-                                    id="user_edit_template"
+                            <button type="button" class="btn btn-info" data-id="template" id="user_edit_template"
                                     data-toggle="modal" data-target="#userDialog" data-action="update">
                                 Редактировать
                             </button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-danger" data-id="template"
-                                    id="user_delete_template"
+                            <button type="button" class="btn btn-danger" data-id="template" id="user_delete_template"
                                     data-toggle="modal" data-target="#userDialog" data-action="delete">
                                 Удалить
                             </button>
@@ -167,11 +164,10 @@
                            name="password">
                 </div>
                 <div class="form-group m-auto" style="width: 300px">
-                    <label for="select_new_user_roles" class="m-0">Роли(можно несколько)</label>
-                    <select class="form-control" id="select_new_user_roles" name="roles" multiple>
-                        <option class="option" id="option_template" hidden></option>
+                    <label for="new_user_roles" class="m-0">Роли</label>
+                    <select class="form-control" id="new_user_roles" name="roles" multiple>
+                        <option class="option" id="option_template_new_user_roles" hidden></option>
                     </select>
-                    <span hidden id="roles_number"></span>
                 </div>
                 <button type="button" class="btn btn-success" onclick="save_new_user_click()">
                     Зарегистрировать
@@ -230,12 +226,11 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <label class="mb-0 font-weight-bold" for="select_modal_roles">Роли(можно несколько)</label>
+                        <label class="mb-0 font-weight-bold" for="modal_roles">Роли</label>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <!--            name="roles" size="5" убрать  из select ? -->
-                        <select class="form-control w-50" id="select_modal_roles" name="roles" multiple size="5">
-                            <option class="option_role" id="option_role_new_role">new_role</option>
+                        <select class="form-control w-50" id="modal_roles" name="roles" multiple>
+                            <option class="option" id="option_template_modal_roles" hidden></option>
                         </select>
                     </div>
 
@@ -254,6 +249,9 @@
 </div>
 <!------------- < < < Modal window ------------->
 
+<span id='my_id' hidden></span>
+<span id="roles_number" hidden></span>
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
         crossorigin="anonymous"></script>
@@ -266,7 +264,7 @@
 
 <script src="start.js"></script>
 <script src="admin.js"></script>
+<script src="modal.js"></script>
 <!--<script src="new-user.js"></script>-->
-<!--<script src="modal.js"></script>-->
 </body>
 </html>
