@@ -168,7 +168,10 @@
                 </div>
                 <div class="form-group m-auto" style="width: 300px">
                     <label for="select_new_user_roles" class="m-0">Роли(можно несколько)</label>
-                    <select class="form-control" id="select_new_user_roles" name="roles" multiple size="5"></select>
+                    <select class="form-control" id="select_new_user_roles" name="roles" multiple>
+                        <option class="option" id="option_template" hidden></option>
+                    </select>
+                    <span hidden id="roles_number"></span>
                 </div>
                 <button type="button" class="btn btn-success" onclick="save_new_user_click()">
                     Зарегистрировать
