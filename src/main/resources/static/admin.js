@@ -149,13 +149,13 @@ function rightBlockAdminClickRebuildRightBlock() {
 //         columns[i].hidden = hide
 //     }
 // }
-//
-// async function lock_click(id) {
-//     await fetch('/admin/api/lock/' + id, {
-//         method: 'PUT',
-//         body: document.getElementById('user_locked_' + id).checked
-//     })
-// }
+
+async function lock_click(id) {
+    await fetch('/admin/api/lock/' + id, {
+        method: 'PUT',
+        body: document.getElementById('user_locked_' + id).checked
+    })
+}
 
 function new_user_click() {
     document.getElementById('firstname').value = ''

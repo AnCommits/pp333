@@ -44,27 +44,27 @@ public class AdminRestControllers {
         userService.updateUser(user);
     }
 
-    @PutMapping("/update")
-    public String updateUser(@RequestBody User user) {
-        if (!userService.getUserById(user.getId()).getPassword().equals(user.getPassword())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-        userService.updateUser(user);
-        return user.getPassword();
-    }
+//    @PutMapping("/update")
+//    public String updateUser(@RequestBody User user) {
+//        if (!userService.getUserById(user.getId()).getPassword().equals(user.getPassword())) {
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        }
+//        userService.updateUser(user);
+//        return user.getPassword();
+//    }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteUser(@PathVariable long id) {
-        userService.removeUserById(id);
-    }
+//    @DeleteMapping("/delete/{id}")
+//    public void deleteUser(@PathVariable long id) {
+//        userService.removeUserById(id);
+//    }
 
-    @PostMapping("/save-user")
-    public User saveUser(@RequestBody User user) {
-        String passwordHash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(passwordHash);
-        userService.saveUser(user);
-        return user;
-    }
+//    @PostMapping("/save-user")
+//    public User saveUser(@RequestBody User user) {
+//        String passwordHash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(passwordHash);
+//        userService.saveUser(user);
+//        return user;
+//    }
 
 //    @GetMapping("/admin/get-all-users")
 //    public ResponseEntity<List<User>> getAllUsersAnMyId(Authentication authentication) {
