@@ -35,10 +35,8 @@ async function save_new_user_click() {
         const usersParts = await response.json()
         user.id = usersParts.id
         user.password = usersParts.password
-        putUserOnRightBlock(user, Number(document.getElementById('my_id')))
-
-        // добавить user на левую панель
-
+        putUserInLeftBlock(user)
+        putUserInRightBlock(user, Number(document.getElementById('my_id')))
         users_click()
     } else {
         alert('Ошибка HTTP: ' + response.status)

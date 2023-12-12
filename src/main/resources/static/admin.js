@@ -4,8 +4,8 @@ async function adminPage(myId) {
     if (responseUsers.ok) {
         const users = await responseUsers.json()
         users.forEach(user => {
-            putUserOnLeftBlock(user)
-            putUserOnRightBlock(user, myId)
+            putUserInLeftBlock(user)
+            putUserInRightBlock(user, myId)
         })
 
         const allRoles = await loadAllRoles()
@@ -17,7 +17,7 @@ async function adminPage(myId) {
     }
 }
 
-function putUserOnLeftBlock(user) {
+function putUserInLeftBlock(user) {
     const newTegA = document.createElement('a')
     newTegA.setAttribute('class', 'nav-link')
     newTegA.setAttribute('href', '#')
@@ -27,7 +27,7 @@ function putUserOnLeftBlock(user) {
     document.getElementById('left_block').appendChild(newTegA)
 }
 
-function putUserOnRightBlock(user, myId) {
+function putUserInRightBlock(user, myId) {
     const newTr = document.createElement('tr')
     newTr.setAttribute('class', 'right_block_user')
     newTr.setAttribute('id', 'right_block_user_' + user.id)
