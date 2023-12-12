@@ -68,7 +68,7 @@ $('#update-user-button').click(async function () {
     let message = checkName(firstname, lastname) + checkBirthDate(birthdate) +
         checkEmail(email, id) + checkPassword(password)
     if (myId === id && adminStatusChanged) {
-        message += 'Роль ADMIN отменяется старшим администратором.'
+        message += 'Роль ADMIN отменяется назначившим администратором.'
     }
     if (message !== '') {
         alert(message)
@@ -84,7 +84,8 @@ $('#update-user-button').click(async function () {
         birthdate: birthdate,
         locked: document.getElementById('user_locked_' + id).checked,
         roles: newRolesNames,
-        parentAdminId: parentAdminId  // for view (not for saving)
+        parentAdminId: parentAdminId,  // for view (not for saving)
+        descendant: adminStatusChanged
     }
 
     let response = await fetch('/admin/api/update', {
@@ -139,10 +140,3 @@ function oldRolesNamesIncludeAdmin(id) {
     }
     return false
 }
-
-// function setTextContent(user) {
-//     document.getElementById('user_firstname_id_' + user.id).textContent = user.firstname
-//     document.getElementById('user_lastname_id_' + user.id).textContent = user.lastname
-//     document.getElementById('user_birthdate_id_' + user.id).textContent =
-//         user.birthdate === null ? '' : user.birthdate.substring(0, 10)
-// }

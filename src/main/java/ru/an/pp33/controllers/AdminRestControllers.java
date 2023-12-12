@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.an.pp33.constants.RolesType;
-import ru.an.pp33.dto.UserFromClient;
+import ru.an.pp33.dto.FrontUser;
 import ru.an.pp33.helper.UserUtils;
 import ru.an.pp33.mapper.UserMapper;
 import ru.an.pp33.models.User;
@@ -30,7 +30,7 @@ public class AdminRestControllers {
     public List<User> getAllUsers(Authentication authentication) {
         List<User> users = userService.getAllUsers();
         User me = (User) authentication.getPrincipal();
-        // ToDo isAncestor достаточно устанавливать только для админов
+//  ToDo                        isAncestor достаточно устанавливать только для админов
         users.forEach(u -> u.setDescendant(userUtils.isAncestor(u, me)));
         return users;
     }
@@ -53,7 +53,7 @@ public class AdminRestControllers {
     }
 
     @PostMapping("/save-user")
-    public String saveUser(@RequestBody UserFromClient userDto, Authentication authentication) {
+    public String saveUser(@RequestBody FrontUser userDto, Authentication authentication) {
         User me = (User) authentication.getPrincipal();
         User user = userMapper.toUser(userDto);
         user.setParentAdminId(me.getId());
@@ -62,19 +62,12 @@ public class AdminRestControllers {
     }
 
     @PutMapping("/update")
-    public String updateUser(@RequestBody UserFromClient userDto) {
+    public String updateUser(@RequestBody FrontUser userDto, Authentication authentication) {
+        User me = (User) authentication.getPrincipal();
         User user = userMapper.toUser(userDto);
-//                          ToDo    Check admin's rights and set parentAdminId
+// ToDo                              Check admin's rights about other admins
+        userUtils.setUsersParentAdminId(user, me);
         userService.updateUser(user);
         return user.getPassword();
     }
-
-//    @GetMapping("/{id}")
-//    public User getUserById(@PathVariable long id) {
-//        User user = userService.getUserById(id);
-//        if (user != null) {
-//            return user;
-//        }
-//        throw new RuntimeException("User with " + id + " not found");
-//    }
 }

@@ -135,22 +135,6 @@ function rightBlockAdminClickRebuildRightBlock() {
 
 }
 
-// function handleClick(elementId, hide) {
-//     let links = document.getElementById('left_block').getElementsByClassName('nav-link')
-//     for (i in links) {
-//         links[i].className = 'nav-link'
-//     }
-//     document.getElementById(elementId).className = 'nav-link active disabled'
-//     let line = document.getElementById('right_block_users').getElementsByClassName('about_user')
-//     for (i in line) {
-//         line[i].hidden = hide
-//     }
-//     let columns = document.getElementsByClassName('admin_column')
-//     for (i in columns) {
-//         columns[i].hidden = hide
-//     }
-// }
-
 async function lock_click(id) {
     const response = await fetch('/admin/api/lock/' + id, {
         method: 'PUT',

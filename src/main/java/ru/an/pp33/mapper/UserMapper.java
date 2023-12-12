@@ -2,7 +2,7 @@ package ru.an.pp33.mapper;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import ru.an.pp33.dto.UserFromClient;
+import ru.an.pp33.dto.FrontUser;
 import ru.an.pp33.models.Role;
 import ru.an.pp33.models.User;
 
@@ -17,10 +17,10 @@ public class UserMapper {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User toUser(UserFromClient userDto) {
+    public User toUser(FrontUser userDto) {
         Set<Role> roles = new HashSet<>();
         userDto.getRoles().forEach(r -> roles.add(new Role(r)));
-        return new User(
+        User user = new User(
                 userDto.getFirstname(),
                 userDto.getLastname(),
                 userDto.getEmail(),
@@ -29,5 +29,7 @@ public class UserMapper {
                 roles,
                 userDto.isLocked()
         );
+        user.setId(userDto.getId());
+        return user;
     }
 }

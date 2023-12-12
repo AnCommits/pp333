@@ -39,12 +39,6 @@ public class User implements UserDetails {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Calendar birthdate;
 
-//    @Transient
-//    private String birthdateAsString;
-
-//    @Transient
-//    int age;
-
     @ManyToMany(cascade = {CascadeType.ALL})
     @JsonManagedReference
     @JoinTable(name = "user_role",
@@ -52,13 +46,10 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-//    @Transient
-//    private List<String> rolesNames;
-
     private boolean locked;
 
     /**
-     * The id of the admin, who created this user or changed admin-status
+     * id of the admin, who created this user or changed role ADMIN
      */
     private long parentAdminId;
 

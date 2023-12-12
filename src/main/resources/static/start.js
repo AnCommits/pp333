@@ -27,7 +27,6 @@ function putEmailAndRolesInHeader(user) {
 }
 
 function putMyNameInLeftBlock(user) {
-    console.log(document.getElementById('left_block_me'))
     document.getElementById('left_block_me').textContent = user.firstname + ' ' + user.lastname
 }
 
