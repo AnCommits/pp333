@@ -41,6 +41,8 @@ function putUserDataInRightBlock(user) {
 }
 
 function putRolesIntoLiTagsAndCheckAdmin(tagId, user) {
+    const parentTag = document.getElementById(tagId)
+    parentTag.innerText = ''
     let hasRoleAdmin = false;
     for (let i in user.roles) {
         const role = Object.keys(user.roles[i]).includes('name')
@@ -49,7 +51,7 @@ function putRolesIntoLiTagsAndCheckAdmin(tagId, user) {
         const tagLi = document.createElement('li')
         tagLi.setAttribute('class', 'list-group-item p-0 role_user_' + user.id)
         tagLi.textContent = role
-        document.getElementById(tagId).appendChild(tagLi)
+        parentTag.appendChild(tagLi)
         if (role === 'ADMIN') {
             hasRoleAdmin = true
         }

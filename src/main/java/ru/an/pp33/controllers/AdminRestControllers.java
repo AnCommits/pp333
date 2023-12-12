@@ -61,14 +61,13 @@ public class AdminRestControllers {
         return String.format("{\"id\": %d, \"password\": \"%s\"}", user.getId(), user.getPassword());
     }
 
-//    @PutMapping("/update")
-//    public String updateUser(@RequestBody User user) {
-//        if (!userService.getUserById(user.getId()).getPassword().equals(user.getPassword())) {
-//            user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        }
-//        userService.updateUser(user);
-//        return user.getPassword();
-//    }
+    @PutMapping("/update")
+    public String updateUser(@RequestBody UserFromClient userDto) {
+        User user = userMapper.toUser(userDto);
+//                          ToDo    Check admin's rights and set parentAdminId
+        userService.updateUser(user);
+        return user.getPassword();
+    }
 
 //    @GetMapping("/{id}")
 //    public User getUserById(@PathVariable long id) {

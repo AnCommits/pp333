@@ -23,7 +23,7 @@ async function save_new_user_click() {
         locked: false,
         roles: rolesNames,
         parentAdminId: Number(document.getElementById('my_id').textContent), // for view (not for saving)
-        descendant: true
+        descendant: true // for view (not for saving)
     }
 
     const response = await fetch('/admin/api/save-user', {
