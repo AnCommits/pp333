@@ -29,7 +29,7 @@ $('#userDialog').on('show.bs.modal', function (event) {
     if ((button.data('action') === 'update')) {
         document.getElementById('userDialogLabel').textContent = 'Редактировать пользователя'
         document.getElementById('delete-user-button').hidden = true
-        document.getElementById('save-user-button').hidden = false
+        document.getElementById('update-user-button').hidden = false
         document.getElementById('user-firstname').disabled = false
         document.getElementById('user-lastname').disabled = false
         document.getElementById('user-birthdate').disabled = false
@@ -39,7 +39,7 @@ $('#userDialog').on('show.bs.modal', function (event) {
     } else {
         document.getElementById('userDialogLabel').textContent = 'Удалить пользователя'
         document.getElementById('delete-user-button').hidden = false
-        document.getElementById('save-user-button').hidden = true
+        document.getElementById('update-user-button').hidden = true
         document.getElementById('user-firstname').disabled = true
         document.getElementById('user-lastname').disabled = true
         document.getElementById('user-birthdate').disabled = true
@@ -49,22 +49,20 @@ $('#userDialog').on('show.bs.modal', function (event) {
     }
 })
 
-$('#save-user-button').click(async function () {
-    console.log('save-user-button')
-
-    // const modal = $('#userDialog')
-    // const id = modal.find('#user-id').val()
-    // const firstname = modal.find('#user-firstname').val()
-    // const lastname = modal.find('#user-lastname').val()
-    // const birthdate = modal.find('#user-birthdate').val()
-    // const email = modal.find('#user-email').val()
-    // const password = modal.find('#user-password').val()
-    // const message = checkName(firstname, lastname) + checkBirthDate(birthdate) +
-    //     checkEmail(email, id) + checkPassword(password)
-    // if (message !== '') {
-    //     alert(message)
-    //     return
-    // }
+$('#update-user-button').click(async function () {
+    const modal = $('#userDialog')
+    const id = modal.find('#user-id').val()
+    const firstname = modal.find('#user-firstname').val()
+    const lastname = modal.find('#user-lastname').val()
+    const birthdate = modal.find('#user-birthdate').val()
+    const email = modal.find('#user-email').val()
+    const password = modal.find('#user-password').val()
+    const message = checkName(firstname, lastname) + checkBirthDate(birthdate) +
+        checkEmail(email, id) + checkPassword(password)
+    if (message !== '') {
+        alert(message)
+        return
+    }
     // const age = getAge(birthdate)
     // const rolesNow = $('select#user-roles').val()
     //

@@ -50,9 +50,10 @@ function checkName(firstname, lastname) {
 }
 
 function checkEmail(email, id) {
-    let message = email === '' ? 'Поле Е-мэйл обязательно для заполнения.\n' : ''
-    message += emailExists(email, id) ? (email + ' уже зарегистрирован. Используйте другой е-мэйл.\n') : ''
-    return message
+    if (email === '') {
+        return 'Поле Е-мэйл обязательно для заполнения.\n'
+    }
+    return emailExists(email, id) ? (email + ' уже зарегистрирован. Используйте другой е-мэйл.\n') : ''
 }
 
 function emailExists(email, id) {

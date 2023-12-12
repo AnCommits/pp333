@@ -70,14 +70,6 @@ public class AdminRestControllers {
 //        return user.getPassword();
 //    }
 
-//    @GetMapping("/admin/get-all-users")
-//    public ResponseEntity<List<User>> getAllUsersAnMyId(Authentication authentication) {
-//        HttpHeaders headers = new HttpHeaders();
-////        headers.add("my-id", "1");
-//        headers.add("my-id", String.valueOf(((User) authentication.getPrincipal()).getId()));
-//        return new ResponseEntity<>(userService.getAllUsers(), headers, HttpStatus.OK);
-//    }
-
 //    @GetMapping("/{id}")
 //    public User getUserById(@PathVariable long id) {
 //        User user = userService.getUserById(id);
