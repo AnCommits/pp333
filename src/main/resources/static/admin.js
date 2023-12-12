@@ -152,10 +152,13 @@ function rightBlockAdminClickRebuildRightBlock() {
 // }
 
 async function lock_click(id) {
-    await fetch('/admin/api/lock/' + id, {
+    const response = await fetch('/admin/api/lock/' + id, {
         method: 'PUT',
         body: document.getElementById('user_locked_' + id).checked
     })
+    if (!response.ok) {
+        alert('Ошибка HTTP: ' + response.status)
+    }
 }
 
 function new_user_click() {

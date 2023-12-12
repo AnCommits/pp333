@@ -11,11 +11,9 @@ async function save_new_user_click() {
         alert(message)
         return
     }
-    const age = getAge(birthdate) // для отображения после сохранения
-    const roles = $('select#new_user_roles').val()
-    console.log(roles)
+    const rolesNames = $('select#new_user_roles').val()
 
-    let user = {
+    const user = {
         id: id,
         firstname: firstname,
         lastname: lastname,
@@ -23,44 +21,21 @@ async function save_new_user_click() {
         password: password,
         birthdate: birthdate,
         locked: false,
-        roles: roles
+        roles: rolesNames,
+        parentAdminId: Number(document.getElementById('my_id').textContent), // for view (not for saving)
+        descendant: true
     }
 
-    let response = await fetch('/admin/api/save-user', {
+    const response = await fetch('/admin/api/save-user', {
         method: 'POST',
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         body: JSON.stringify(user)
     })
     if (response.ok) {
-        console.log('ok')
-        user = await response.json()
-        id = user.id
-        password = user.password
-        console.log(id)
-        console.log(password)
-        // const newTr = document.createElement('tr')
-        // newTr.setAttribute('id', 'about_user_' + id)
-        // newTr.setAttribute('class', 'about_user')
-        // let innerTr = document.getElementById('right_block_user_new_user').innerHTML
-        // innerTr = innerTr.replaceAll('new_user', id.toString())
-        // newTr.innerHTML = innerTr
-        // document.getElementById('right_block_users').appendChild(newTr)
-        //
-        // document.getElementById('user_id_' + id).textContent = id.toString()
-        // setTextContent(user)
-        // document.getElementById('user_age_' + id).textContent = age
-        // document.getElementById('user_email_' + id).textContent = email
-        // document.getElementById('user_password_' + id).textContent = password
-        // document.getElementById('user_parent_id_' + id).textContent = parentAdminId.toString()
-
-
-        // document.getElementById('user_roles_new_user').textContent = roles
-        // document.getElementById('role_user_new_user').textContent = role
-
-        // let innerUl = ''
-        // rolesNow.forEach(r => {
-        //     innerUl += '<li class="list-group-item p-0" name="role_user_' + id + '">' + r + '</li>'
-        // })
+        const usersParts = await response.json()
+        user.id = usersParts.id
+        user.password = usersParts.password
+        putUserOnRightBlock(user, Number(document.getElementById('my_id')))
 
         // добавить user на левую панель
 

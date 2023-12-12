@@ -43,7 +43,9 @@ function putUserDataInRightBlock(user) {
 function putRolesIntoLiTagsAndCheckAdmin(tagId, user) {
     let hasRoleAdmin = false;
     for (let i in user.roles) {
-        const role = user.roles[i].name
+        const role = Object.keys(user.roles[i]).includes('name')
+            ? user.roles[i].name
+            : user.roles[i]
         const tagLi = document.createElement('li')
         tagLi.setAttribute('class', 'list-group-item p-0 role_user_' + user.id)
         tagLi.textContent = role
@@ -56,7 +58,7 @@ function putRolesIntoLiTagsAndCheckAdmin(tagId, user) {
 }
 
 function getAge(birthday) {
-    return birthday === null
+    return birthday === null || birthday === ''
         ? ''
         : ((new Date(Date.now() - new Date(birthday).getTime())).getUTCFullYear() - 1970).toString()
 }

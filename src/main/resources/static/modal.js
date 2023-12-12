@@ -122,12 +122,16 @@ $('#delete-user-button').click(async function () {
     const modal = $('#userDialog')
     const id = modal.find('#user-id').val()
 
-    await fetch('/admin/api/delete/' + id, {
+    const response = await fetch('/admin/api/delete/' + id, {
         method: 'DELETE'
     })
-    modal.modal('hide')
-    document.getElementById('left_block_user_' + id).remove()
-    document.getElementById('right_block_user_' + id).remove()
+    if (response.ok) {
+        modal.modal('hide')
+        document.getElementById('left_block_user_' + id).remove()
+        document.getElementById('right_block_user_' + id).remove()
+    } else {
+        alert('Ошибка HTTP: ' + response.status)
+    }
 })
 
 // function rolesBeforeIncludesAdmin(id) {
