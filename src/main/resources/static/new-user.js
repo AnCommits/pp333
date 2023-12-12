@@ -11,22 +11,19 @@ async function save_new_user_click() {
         alert(message)
         return
     }
-    // const age = getAge(birthdate)
-    const roles = $('select#roles').val()
-    // добавлять в контроллере
-    // const parentAdminId = document.getElementById('my_id').textContent
+    const age = getAge(birthdate) // для отображения после сохранения
+    const roles = $('select#new_user_roles').val()
+    console.log(roles)
 
     let user = {
         id: id,
         firstname: firstname,
         lastname: lastname,
-        // birthdate: birthdate,
-        // email: email,
-        // locked: false,
-        // password: password,
-        // добавлять в контроллере
-        // parentAdminId: Number(parentAdminId),
-        // roles: roles
+        email: email,
+        password: password,
+        birthdate: birthdate,
+        locked: false,
+        roles: roles
     }
 
     let response = await fetch('/admin/api/save-user', {
@@ -35,10 +32,10 @@ async function save_new_user_click() {
         body: JSON.stringify(user)
     })
     if (response.ok) {
+        console.log('ok')
         user = await response.json()
         id = user.id
         password = user.password
-
         console.log(id)
         console.log(password)
         // const newTr = document.createElement('tr')
@@ -68,9 +65,8 @@ async function save_new_user_click() {
         // добавить user на левую панель
 
         users_click()
-        // } else {
-        //     alert('Ошибка HTTP: ' + response.status)
-        // }
+    } else {
+        alert('Ошибка HTTP: ' + response.status)
     }
 }
 
@@ -110,8 +106,3 @@ function checkPassword(password) {
         ? 'Длина пароля должна быть не менее 2 символов.\n'
         : ''
 }
-
-// function users_click() {
-//     document.getElementById('new_user_panel').hidden = true
-//     document.getElementById('users_panel').hidden = false
-// }
