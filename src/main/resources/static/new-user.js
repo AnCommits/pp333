@@ -32,8 +32,9 @@ async function save_new_user_click() {
         body: JSON.stringify(user)
     })
     if (response.ok) {
+        console.log('response: ', response)
         const usersParts = await response.json()
-        user.id = usersParts.id
+        user.id = Number(usersParts.id)
         user.password = usersParts.password
         putUserInLeftBlock(user)
         putUserInRightBlock(user, Number(document.getElementById('my_id')))

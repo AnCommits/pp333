@@ -76,7 +76,8 @@ function leftBlockUserClick(id) {
 function leftBlockUserClickRebuildLeftBlock(id) {
     const leftBlockLinks = document.getElementById('left_block').getElementsByClassName('nav-link')
     for (let i = 0; i < leftBlockLinks.length; i++) {
-        document.getElementById('left_block_user_' + i).setAttribute('class', 'nav-link')
+        const linkId = Number(leftBlockLinks[i].id.replaceAll('left_block_user_', ''))
+        document.getElementById('left_block_user_' + linkId).setAttribute('class', 'nav-link')
     }
     document.getElementById('left_block_user_' + id)
         .setAttribute('class', 'nav-link active disabled')

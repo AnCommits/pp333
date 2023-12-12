@@ -39,7 +39,8 @@ public class User implements UserDetails {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Calendar birthdate;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
+//    @ManyToMany(cascade = {CascadeType.ALL})
     @JsonManagedReference
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),

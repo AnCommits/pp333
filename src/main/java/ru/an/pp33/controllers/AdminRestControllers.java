@@ -2,6 +2,7 @@ package ru.an.pp33.controllers;
 
 import lombok.Data;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ru.an.pp33.constants.RolesType;
 import ru.an.pp33.dto.FrontUser;
@@ -18,12 +19,12 @@ import java.util.List;
 public class AdminRestControllers {
     private final UserService userService;
     private final UserUtils userUtils;
-    private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public AdminRestControllers(UserService userService, UserUtils userUtils, UserMapper userMapper) {
+    public AdminRestControllers(UserService userService, UserUtils userUtils, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.userUtils = userUtils;
-        this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/get-all-users")
@@ -55,16 +56,21 @@ public class AdminRestControllers {
     @PostMapping("/save-user")
     public String saveUser(@RequestBody FrontUser userDto, Authentication authentication) {
         User me = (User) authentication.getPrincipal();
-        User user = userMapper.toUser(userDto);
+        User user = UserMapper.toUser(userDto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setParentAdminId(me.getId());
-        userService.saveUser(user);
-        return String.format("{\"id\": %d, \"password\": \"%s\"}", user.getId(), user.getPassword());
+        long id = userService.saveUser(user);
+        return String.format("{\"id\": %d, \"password\": \"%s\"}", id, user.getPassword());
     }
 
     @PutMapping("/update")
     public String updateUser(@RequestBody FrontUser userDto, Authentication authentication) {
         User me = (User) authentication.getPrincipal();
-        User user = userMapper.toUser(userDto);
+        User user = UserMapper.toUser(userDto);
+        String oldPassword = userService.getUserById(user.getId()).getPassword();
+        if (!oldPassword.equals(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
 // ToDo                              Check admin's rights about other admins
         userUtils.setUsersParentAdminId(user, me);
         userService.updateUser(user);

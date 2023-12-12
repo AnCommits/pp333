@@ -5,28 +5,34 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.an.pp33.dao.RoleDao;
 import ru.an.pp33.dao.UserDao;
 import ru.an.pp33.models.Role;
 import ru.an.pp33.models.User;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional(readOnly = true)
 public class UserServiceImp implements UserService, UserDetailsService {
 
     private final UserDao userDao;
+    private final RoleDao roleDao;
 
-    public UserServiceImp(UserDao userDao) {
+    public UserServiceImp(UserDao userDao, RoleDao roleDao) {
         this.userDao = userDao;
+        this.roleDao = roleDao;
     }
 
     @Transactional
     @Override
-    public void saveUser(User user) {
+    public long saveUser(User user) {
         if (user != null) {
-            userDao.saveUser(user);
+            return updateUser(user);
         }
+        return -1;
     }
 
     @Override
@@ -51,10 +57,17 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Transactional
     @Override
-    public void updateUser(User user) {
+    public long updateUser(User user) {
         if (user != null) {
-            userDao.updateUser(user);
+            Set<Role> roles = new HashSet<>();
+            for (Role role : user.getRoles()) {
+                Role roleFromDb = roleDao.getRoleByName(role.getName());
+                roles.add(roleFromDb);
+            }
+            user.setRoles(roles);
+            return userDao.updateUser(user);
         }
+        return -1;
     }
 
     @Transactional
