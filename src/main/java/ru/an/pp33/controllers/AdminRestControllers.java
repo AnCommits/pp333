@@ -45,7 +45,7 @@ public class AdminRestControllers {
     public void lockUser(@PathVariable long id, @RequestBody String lock) {
         User user = userService.getUserById(id);
         user.setLocked(Boolean.parseBoolean(lock));
-        userService.updateUser(user);
+        userService.saveUser(user);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -73,7 +73,7 @@ public class AdminRestControllers {
         }
 // ToDo                              Check admin's rights about other admins
         userUtils.setUsersParentAdminId(user, me);
-        userService.updateUser(user);
+        userService.saveUser(user);
         return user.getPassword();
     }
 }

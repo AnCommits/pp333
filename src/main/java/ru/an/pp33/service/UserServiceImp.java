@@ -26,15 +26,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
         this.roleDao = roleDao;
     }
 
-    @Transactional
-    @Override
-    public long saveUser(User user) {
-        if (user != null) {
-            return updateUser(user);
-        }
-        return -1;
-    }
-
     @Override
     public User getUserById(Long id) {
         return userDao.getUserById(id);
@@ -57,7 +48,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Transactional
     @Override
-    public long updateUser(User user) {
+    public long saveUser(User user) {
         if (user != null) {
             Set<Role> roles = new HashSet<>();
             for (Role role : user.getRoles()) {
@@ -65,7 +56,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
                 roles.add(roleFromDb);
             }
             user.setRoles(roles);
-            return userDao.updateUser(user);
+            return userDao.saveUser(user);
         }
         return -1;
     }

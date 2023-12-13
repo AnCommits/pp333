@@ -17,8 +17,6 @@ public interface UserService {
 
     User getUserByEmail(String email);
 
-    long updateUser(User user);
-
     void removeUserById(Long id);
 
     long countUsers();

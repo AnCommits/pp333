@@ -32,7 +32,6 @@ async function save_new_user_click() {
         body: JSON.stringify(user)
     })
     if (response.ok) {
-        console.log('response: ', response)
         const usersParts = await response.json()
         user.id = Number(usersParts.id)
         user.password = usersParts.password

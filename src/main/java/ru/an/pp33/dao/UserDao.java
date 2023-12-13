@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserDao {
 
-    void saveUser(User user);
+    long saveUser(User user);
 
     User getUserById(Long id);
 
@@ -17,7 +17,7 @@ public interface UserDao {
 
     User getUserByEmail(String email);
 
-    long updateUser(User user);
+//    long updateUser(User user);
 
     void removeUserById(Long id);
 

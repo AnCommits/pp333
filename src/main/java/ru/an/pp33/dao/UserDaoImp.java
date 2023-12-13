@@ -21,12 +21,6 @@ public class UserDaoImp implements UserDao {
     private EntityManager entityManager;
 
     @Override
-    public void saveUser(User user) {
-        logger.info("saveUser " + user.toString());
-        entityManager.persist(user);
-    }
-
-    @Override
     public User getUserById(Long id) {
         logger.info("getUserById " + id);
         return entityManager.find(User.class, id);
@@ -74,7 +68,7 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public long updateUser(User user) {
+    public long saveUser(User user) {
         logger.info("updateUser " + user);
         return entityManager.merge(user).getId();
     }
