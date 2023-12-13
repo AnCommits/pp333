@@ -40,7 +40,6 @@ public class User implements UserDetails {
     private Calendar birthdate;
 
     @ManyToMany
-//    @ManyToMany(cascade = {CascadeType.ALL})
     @JsonManagedReference
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),

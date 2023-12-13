@@ -109,9 +109,13 @@ function leftBlockUserClickRebuildRightBlock(id) {
     document.getElementById('right_block_email').textContent =
         document.getElementById('user_email_' + id).textContent
 
-    const tdRoles = document.getElementById('right_block_roles')
-    tdRoles.innerHTML = ''
-    tdRoles.appendChild(document.getElementById('user_roles_' + id).cloneNode(true))
+    let roles = []
+    const elementRoles = document.getElementsByClassName('role_user_' + id)
+    for (let j = 0; j < elementRoles.length; j++) {
+        roles.push(elementRoles[j].textContent)
+    }
+    const user = {id: id, roles: roles}
+    putRolesIntoLiTagsAndCheckAdmin('right_block_roles', user)
 }
 
 function left_block_admin_click() {
